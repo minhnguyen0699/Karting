@@ -7,6 +7,7 @@ namespace KartGame.KartSystems
 {
     public class ArcadeKart : MonoBehaviour
     {
+        
         [System.Serializable]
         public class StatPowerup
         {
@@ -596,5 +597,7 @@ namespace KartGame.KartSystems
 
             ActivateDriftVFX(IsDrifting && GroundPercent > 0.0f);
         }
+      
     }
+   
 }

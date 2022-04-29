@@ -13,6 +13,7 @@ public class GameFlowManager : MonoBehaviour
     public float endSceneLoadDelay = 3f;
     [Tooltip("The canvas group of the fade-to-black screen")]
     public CanvasGroup endGameFadeCanvasGroup;
+    public GhostManager ghostManager;
 
     [Header("Win")]
     [Tooltip("This string has to be the name of the scene you want to load when winning")]
@@ -28,7 +29,7 @@ public class GameFlowManager : MonoBehaviour
     public DisplayMessage winDisplayMessage;
 
     public PlayableDirector raceCountdownTrigger;
-
+    private bool isGameEnded;
     [Header("Lose")]
     [Tooltip("This string has to be the name of the scene you want to load when losing")]
     public string loseSceneName = "LoseScene";
@@ -90,6 +91,9 @@ public class GameFlowManager : MonoBehaviour
     }
 
     void StartRace() {
+
+        ghostManager.recording = true;
+        ghostManager.playing = false;
         foreach (ArcadeKart k in karts)
         {
 			k.SetCanMove(true);
@@ -148,6 +152,19 @@ public class GameFlowManager : MonoBehaviour
     }
 
     void EndGame(bool win)
+    {
+        if (ghostManager.isGhostEnd)
+        {
+            endGameFinal(win);
+        }
+
+        // Set 'playing is true' only once
+        if (isGameEnded) return;
+        isGameEnded = true;
+        ghostManager.recording = false;
+        ghostManager.playing = true;
+    }
+    void endGameFinal(bool win)
     {
         // unlocks the cursor before leaving the scene, to be able to click buttons
         Cursor.lockState = CursorLockMode.None;

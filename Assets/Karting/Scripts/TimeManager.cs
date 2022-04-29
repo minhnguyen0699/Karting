@@ -11,6 +11,7 @@ public class TimeManager : MonoBehaviour
     public bool IsOver { get; private set; }
 
     private bool raceStarted;
+    public GhostManager ghostManager;
 
     public static Action<float> OnAdjustTime;
     public static Action<int, bool, GameMode> OnSetTime;
@@ -68,6 +69,7 @@ public class TimeManager : MonoBehaviour
 
     public void StopRace() {
         raceStarted = false;
+        
     }
 }
 
