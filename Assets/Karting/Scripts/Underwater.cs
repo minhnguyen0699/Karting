@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class Underwater : MonoBehaviour
 {
+    private GameObject volumeParent;
     private GameObject volume;
-    private GameObject volume1;
+    public Rigidbody playerRb;
+
+
 
     // Use this for initialization
     void Start()
     {
-        volume = GameObject.Find("Volume");
-        volume1 = volume.transform.Find("PostProcessVolume").gameObject;
+        volumeParent = GameObject.Find("Volume");
+        volume = volumeParent.transform.Find("PostProcessVolume").gameObject;
+        
+
+
     }
 
     // Update is called once per frame
@@ -22,8 +29,14 @@ public class Underwater : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        volume1.SetActive(true);
+        volume.SetActive(true);
+        playerRb.useGravity = false;
     }
-   
+    private void OnTriggerExit(Collider other)
+    {
+        volume.SetActive(false);
+        playerRb.useGravity = true;
+    }
+
 }
 
