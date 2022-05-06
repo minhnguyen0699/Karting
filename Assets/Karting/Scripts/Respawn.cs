@@ -5,19 +5,21 @@ using UnityEngine;
 public class Respawn : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Vector3 spawnPosPlayer = new Vector3(17.7f, 15.0f, 14.0f);
+
+    private GameObject spawnPos;
     void Start()
     {
-
+        spawnPos = GameObject.Find("SpawnPos");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < 5)
+        if (transform.position.y < -10)
         {
-            transform.position = spawnPosPlayer;
+            transform.position = spawnPos.transform.position;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().transform.rotation =Quaternion.Euler( Vector3.zero);
         }
     }
 }
