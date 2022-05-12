@@ -31,10 +31,11 @@ public class CrashObject : TargetObject
             CollectVFX.Play();
                
         if (m_rigid) m_rigid.AddForce(forceUpOnCollide*Vector3.up, ForceMode.Impulse);
-        
+
         Objective.OnUnregisterPickup(this);
 
         TimeManager.OnAdjustTime(TimeGained);
+        Destroy(gameObject,1.5f);
     }
 
     private void OnTriggerEnter(Collider other)

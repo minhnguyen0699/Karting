@@ -19,5 +19,20 @@ EditorBuildSettings:
     guid: d6801f2e59f75ee4b919cf5da4e48e3b
   - enabled: 1
     path: Assets/Karting/Scenes/Level2.unity
-    guid: 5cb8a8665f8b31d4d8bb5d673a052144
+    guid: 7f1845d87afaf8845a7271b105a912a5
+  - enabled: 1
+    path: Assets/Karting/Scenes/LoseScene2.unity
+    guid: 30a2b0f868b72e846ba6263dfa88a219
+  - enabled: 1
+    path: Assets/Karting/Scenes/WinScene2.unity
+    guid: 7eed9ecd6b17f2845a4c0f4a4f8ff8c5
+  - enabled: 1
+    path: Assets/Karting/Scenes/Level3.unity
+    guid: 1195ec837f928334bbe906b617a3e8a8
+  - enabled: 1
+    path: Assets/Karting/Scenes/LoseScene3.unity
+    guid: b4fa5c13ff5dcf447906c858bbf064e4
+  - enabled: 1
+    path: Assets/Karting/Scenes/WinScene3.unity
+    guid: 691940e05e0a01b4195a92a84cf7342e
   m_configObjects: {}

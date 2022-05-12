@@ -1,17 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TankShooting : MonoBehaviour
 {
     
-    public Rigidbody m_Shell;
+    public GameObject m_Shell;
     public Transform m_FireTransform;
-    public float m_MinLaunchForce = 15f;
-    public float m_MaxLaunchForce = 30f;
+    public float m_MinLaunchForce = 99999f;
+    public float m_MaxLaunchForce = 50f;
     public float m_MaxChargeTime = 0.75f;
-
-
-   
+    public int bulletsAmount = 10;
+    [SerializeField]
+    private GameObject textObject;
+    private TextMeshProUGUI bulletsText;
     private float m_CurrentLaunchForce;
     private float m_ChargeSpeed;
     
@@ -24,8 +26,8 @@ public class TankShooting : MonoBehaviour
 
     private void Start()
     {
-        
 
+        bulletsText = textObject.GetComponent<TextMeshProUGUI>();
         m_ChargeSpeed = (m_MaxLaunchForce - m_MinLaunchForce) / m_MaxChargeTime;
     }
 
@@ -33,25 +35,16 @@ public class TankShooting : MonoBehaviour
     private void Update()
     {
         // Track the current state of the fire button and make decisions based on the current launch force.
-        
 
-
-        
-
-         if (Input.GetKeyDown(KeyCode.Space))
+         if (Input.GetKeyDown(KeyCode.Space) && bulletsAmount >= 1)
         {
 
             
             m_CurrentLaunchForce = m_MinLaunchForce;
             Fire();
-            
-
+            bulletsAmount--;
         }
-
-        else if (Input.GetKeyDown(KeyCode.Space) )
-        {
-            Fire();
-        }
+        bulletsText.SetText(bulletsAmount.ToString());
     }
 
 
@@ -59,15 +52,26 @@ public class TankShooting : MonoBehaviour
     {
         // Instantiate and launch the shell.
 
+       
+        GameObject shellInstance =
+            Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation) ;
+        Vector3 velo = GetComponent<Rigidbody>().velocity; // car
 
-        Rigidbody shellInstance =
-            Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
-
-        shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward; ;
-
-
+        shellInstance.GetComponent<Rigidbody>().velocity = (m_CurrentLaunchForce+ velo.magnitude ) *   (m_FireTransform.forward   + new Vector3(0,0, Random.Range(-0.1f, 0.1f)) );
+        
+        
         m_CurrentLaunchForce = m_MinLaunchForce;
 
-        
+        Destroy(shellInstance, 3.0f);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("AddBullet"))
+        {
+            bulletsAmount += 10;
+            
+            Destroy(other.gameObject);
+        }
+    
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class AsteroidSpawnManager : MonoBehaviour
 {
     public GameObject[] asteroidPrefabs;
-    private float spawnRangeX = 150;
+    
     private float spawnPosZ = 150;
     private float startDelay = 0;
     private float spawnInterval = 1.0f;

@@ -9,8 +9,6 @@ public class AstroidDir : MonoBehaviour
     public GameObject blastParticel;
     public LayerMask m_PlayerMask;
     private float step;
-    private float m_ExplosionRadius = 200.0f;
-    private float m_ExplosionForce = 200.0f;
     public bool isDestoyed;
     public Rigidbody playerRb;
    
